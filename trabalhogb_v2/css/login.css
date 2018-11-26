@@ -1,0 +1,23 @@
+
+.form-container {
+	border: 0px solid #fff;
+	padding: 50px 60px;
+	margin-top: 20%;
+	background:#c4c4c4;
+	-webkit-box-shadow: 7px 9px 35px 4px rgba(0,0,0,0.43);
+    -moz-box-shadow: 7px 9px 35px 4px rgba(0,0,0,0.43);
+    box-shadow: 7px 9px 35px 4px rgba(0,0,0,0.43);
+}
+
+div.message{
+    background: transparent url(msg_arrow.gif) no-repeat scroll left center;
+    padding-left: 7px;
+}
+
+div.error{
+    background-color:#F3E6E6;
+    border-color: #924949;
+    border-style: solid solid solid none;
+    border-width: 2px;
+    padding: 2px;
+}
