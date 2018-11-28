@@ -115,7 +115,7 @@ if (isset($_SESSION["login"])) { ?>
                         <?php echo "<a class='apagar_btn' href='CadastroClientes.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
 
                     </td>
-                    <td><a href="export_csv.php">Exportar</td>
+                    <td><a href="exportClientes_csv.php">Exportar</td>
                 </tr>
             </tbody>
             <?php } ?>

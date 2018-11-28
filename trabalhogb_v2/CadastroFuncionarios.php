@@ -1,6 +1,9 @@
 <?php
 require_once 'Classes/Funcionarios.php';
 ?>
+<?php 
+session_start();
+if (isset($_SESSION["login"])) { ?>
 
 <!DOCTYPE html>
 <html>
@@ -85,6 +88,7 @@ require_once 'Classes/Funcionarios.php';
                     <?php echo "<a class='editar_btn' href='CadastroFuncionarios.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
                     <?php echo "<a class='apagar_btn' href='CadastroFuncionarios.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
                 </td>
+				<td><a href="exportFuncionarios_csv.php">Exportar</td>
             </tr>
             </tbody>
         <?php } ?>
@@ -92,3 +96,6 @@ require_once 'Classes/Funcionarios.php';
 </div>
 </body>
 </html>
+<?php } else {
+    header("location:login.php");
+} ?>

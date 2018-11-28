@@ -1,6 +1,9 @@
 <?php
 require_once 'Classes/Usuarios.php';
 ?>
+<?php 
+session_start();
+if (isset($_SESSION["login"])) { ?>
 
 <!DOCTYPE html>
 <html>
@@ -83,6 +86,7 @@ require_once 'Classes/Usuarios.php';
                     <?php echo "<a class='editar_btn' href='CadastroUsuarios.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
                     <?php echo "<a class='apagar_btn' href='CadastroUsuarios.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
                 </td>
+				<td><a href="exportUsuarios_csv.php">Exportar</td>
             </tr>
             </tbody>
         <?php } ?>
@@ -90,3 +94,6 @@ require_once 'Classes/Usuarios.php';
 </div>
 </body>
 </html>
+<?php } else {
+    header("location:login.php");
+} ?>
