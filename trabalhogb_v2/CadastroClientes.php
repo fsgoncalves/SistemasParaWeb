@@ -1,8 +1,7 @@
 <?php
 require_once 'Classes/Clientes.php';
 ?>
-
-<?php 
+<?php
 session_start();
 if (isset($_SESSION["login"])) { ?>
 
@@ -10,10 +9,13 @@ if (isset($_SESSION["login"])) { ?>
 <html>
 <head>
     <title>Cadastro Clientes</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 <body>
-    <div class="input-group">
+    <div>
         <?php #cadastrar novo cliente
             $cliente = new Clientes();
             if (isset($_POST['cadastrar'])){
@@ -49,14 +51,14 @@ if (isset($_SESSION["login"])) { ?>
         <?php
             if(isset($_POST['export'])){
 
-                header('Content-Type: text/csv; charset=utf-8');  
-                header('Content-Disposition: attachment; filename=data.csv');  
-                $output = fopen("php://tmp/", "w");  
+                header('Content-Type: text/csv; charset=utf-8');
+                header('Content-Disposition: attachment; filename=data.csv');
+                $output = fopen("php://tmp/", "w");
                 fputcsv($output, array('ID', 'Nome', 'Endereco', 'Telefone'));
-                $result = $cliente->findAll();  
-                while($row = $result){  
-                       fputcsv($output, $row);  
-                }  
+                $result = $cliente->findAll();
+                while($row = $result){
+                       fputcsv($output, $row);
+                }
                 fclose($output);
 
             }
@@ -85,22 +87,22 @@ if (isset($_SESSION["login"])) { ?>
         <?php } else {?>
 
         <form method="post" action="">
-            <input type="text" name="nome" placeholder="Nome:">
-            <input type="text" name="endereco" placeholder="Endereço:">
-            <input type="text" name="telefone" placeholder="Telefone:">
+            <input class="form-control" type="text" name="nome" required="true" placeholder="Nome:">
+            <input class="form-control" type="text" name="endereco" required="true" placeholder="Endereço:">
+            <input class="form-control" type="text" name="telefone" required="true" placeholder="Telefone:">
             <input type="hidden" name="id" value="">
             <br/>
-            <input type="submit" name="cadastrar" value="Cadastrar Clientes">
+            <input class="btn btn-success btn-block" type="submit" name="cadastrar" value="Cadastrar Clientes">
         </form>
         <?php } ?>
-        <table>
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nome:</th>
-                    <th>Endereco:</th>
-                    <th>Telefone:</th>
-                    <th cosplan="2">Ação:</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome:</th>
+                    <th scope="col">Endereco:</th>
+                    <th scope="col">Telefone:</th>
+                    <th scope="col" cosplan="2">Ação:</th>
                 </tr>
             </thead>
             <?php foreach ($cliente->findAll() as $key => $value) { ?>
@@ -111,19 +113,19 @@ if (isset($_SESSION["login"])) { ?>
                     <td><?php echo $value->endereco; ?></td>
                     <td><?php echo $value->telefone; ?></td>
                     <td>
-                        <?php echo "<a class='editar_btn' href='CadastroClientes.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
-                        <?php echo "<a class='apagar_btn' href='CadastroClientes.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
+                        <?php echo "<a class='btn btn-success' href='CadastroClientes.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
+                        <?php echo "<a class='btn btn-danger' href='CadastroClientes.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
 
                     </td>
-                    <td><a href="exportClientes_csv.php">Exportar</td>
+                    <td><a class="btn btn-warning" href="exportClientes_csv.php">Exportar</td>
                 </tr>
             </tbody>
             <?php } ?>
         </table>
     </div>
+    <a class="btn btn-danger" href="logout.php">Sair</a>
 </body>
 </html>
-
 
 <?php } else {
     header("location:login.php");

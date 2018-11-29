@@ -1,7 +1,7 @@
 <?php
 require_once 'Classes/Usuarios.php';
 ?>
-<?php 
+<?php
 session_start();
 if (isset($_SESSION["login"])) { ?>
 
@@ -9,10 +9,13 @@ if (isset($_SESSION["login"])) { ?>
 <html>
 <head>
     <title>Cadastro Usuarios</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 <body>
-<div class="input-group">
+<div>
     <?php #cadastrar novo Usuario
     $usuario = new Usuarios();
     if(isset($_POST['cadastrar'])){
@@ -60,19 +63,19 @@ if (isset($_SESSION["login"])) { ?>
         </form>
     <?php } else { ?>
         <form method="post" action="">
-            <input type="text" name="login" placeholder="Login:">
-            <input type="password" name="senha" placeholder="Senha:">
+            <input class="form-control" type="text" name="login" required="true" placeholder="Login:">
+            <input class="form-control" type="password" name="senha" required="true" placeholder="Senha:">
             <input type="hidden" name="id" value="">
             <br/>
-            <input type="submit" name="cadastrar" value="Cadastrar Usuarios">
+            <input class="btn btn-success btn-block" type="submit" name="cadastrar" value="Cadastrar Usuarios">
         </form>
     <?php } ?>
-    <table>
+    <table class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Login:</th>
-            <th>Senha:</th>
+            <th scope="col">ID</th>
+            <th scope="col">Login:</th>
+            <th scope="col">Senha:</th>
             <th cosplan="2">Ação:</th>
         </tr>
         </thead>
@@ -83,15 +86,16 @@ if (isset($_SESSION["login"])) { ?>
                 <td><?php echo $value->login; ?></td>
                 <td><?php echo $value->senha; ?></td>
                 <td>
-                    <?php echo "<a class='editar_btn' href='CadastroUsuarios.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
-                    <?php echo "<a class='apagar_btn' href='CadastroUsuarios.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
+                    <?php echo "<a class='btn btn-success' href='CadastroUsuarios.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
+                    <?php echo "<a class='btn btn-danger' href='CadastroUsuarios.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
                 </td>
-				<td><a href="exportUsuarios_csv.php">Exportar</td>
+				<td><a class="btn btn-warning" href="exportUsuarios_csv.php">Exportar</td>
             </tr>
             </tbody>
         <?php } ?>
     </table>
 </div>
+<a class="btn btn-danger" href="logout.php">Sair</a>
 </body>
 </html>
 <?php } else {

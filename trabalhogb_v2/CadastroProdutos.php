@@ -1,7 +1,7 @@
 <?php
 require_once 'Classes/Produtos.php';
 ?>
-<?php 
+<?php
 session_start();
 if (isset($_SESSION["login"])) { ?>
 
@@ -9,10 +9,13 @@ if (isset($_SESSION["login"])) { ?>
 <html>
 <head>
     <title>Cadastro Produtos</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 <body>
-    <div class="input-group">
+    <div>
         <?php #cadastrar novo produto
             $produto = new Produtos();
             if(isset($_POST['cadastrar'])){
@@ -62,11 +65,11 @@ if (isset($_SESSION["login"])) { ?>
         </form>
         <?php } else { ?>
         <form method="post" action="">
-            <input type="text" name="descricao" placeholder="Descrição:">
-            <input type="text" name="preco" placeholder="Preço:">
+            <input class="form-control" type="text" name="descricao" required="true" placeholder="Descrição:">
+            <input class="form-control" type="text" name="preco" required="true" placeholder="Preço:">
             <input type="hidden" name="id" value="">
             <br/>
-            <input type="submit" name="cadastrar" value="Cadastrar Produtos">
+            <input class="btn btn-success btn-block" type="submit" name="cadastrar" value="Cadastrar Produtos">
         </form>
         <?php } ?>
         <table>
@@ -85,15 +88,16 @@ if (isset($_SESSION["login"])) { ?>
                     <td><?php echo $value->descricao; ?></td>
                     <td><?php echo $value->preco; ?></td>
                     <td>
-                        <?php echo "<a class='editar_btn' href='CadastroProdutos.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
-                        <?php echo "<a class='apagar_btn' href='CadastroProdutos.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
+                        <?php echo "<a class='btn btn-success' href='CadastroProdutos.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
+                        <?php echo "<a class='btn btn-danger' href='CadastroProdutos.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
                     </td>
-					<td><a href="exportProdutos_csv.php">Exportar</td>
+					<td><a class="btn btn-warning" href="exportProdutos_csv.php">Exportar</td>
                 </tr>
                 </tbody>
             <?php } ?>
         </table>
     </div>
+    <a class="btn btn-danger" href="logout.php">Sair</a>
 </body>
 </html>
 <?php } else {

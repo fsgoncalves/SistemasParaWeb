@@ -9,10 +9,13 @@ if (isset($_SESSION["login"])) { ?>
 <html>
 <head>
     <title>Cadastro Funcionarios</title>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 <body>
-<div class="input-group">
+<div>
     <?php #cadastrar novo funcionario
     $funcionario = new Funcionarios();
     if(isset($_POST['cadastrar'])){
@@ -62,20 +65,20 @@ if (isset($_SESSION["login"])) { ?>
         </form>
     <?php } else { ?>
         <form method="post" action="">
-            <input type="text" name="nome" placeholder="Nome:">
-            <input type="text" name="matricula" placeholder="Matricula:">
+            <input class="form-control" type="text" name="nome" required="true" placeholder="Nome:">
+            <input class="form-control" type="text" name="matricula" required="true" placeholder="Matricula:">
             <input type="hidden" name="id" value="">
             <br/>
-            <input type="submit" name="cadastrar" value="Cadastrar Funcionarios">
+            <input class="btn btn-success btn-block" type="submit" name="cadastrar" value="Cadastrar Funcionarios">
         </form>
     <?php } ?>
-    <table>
+    <table class="table table-striped">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Nome:</th>
-            <th>Matricula:</th>
-            <th cosplan="2">Ação:</th>
+            <th scope="col">ID</th>
+            <th scope="col">Nome:</th>
+            <th scope="col">Matricula:</th>
+            <th scope="col" cosplan="2">Ação:</th>
         </tr>
         </thead>
         <?php foreach ($funcionario->findAll() as $key => $value) { ?>
@@ -85,15 +88,16 @@ if (isset($_SESSION["login"])) { ?>
                 <td><?php echo $value->nome; ?></td>
                 <td><?php echo $value->matricula; ?></td>
                 <td>
-                    <?php echo "<a class='editar_btn' href='CadastroFuncionarios.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
-                    <?php echo "<a class='apagar_btn' href='CadastroFuncionarios.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
+                    <?php echo "<a class='btn btn-success' href='CadastroFuncionarios.php?acao=editar&id=" . $value->id . "'>Editar</a>"; ?>
+                    <?php echo "<a class='btn btn-danger' href='CadastroFuncionarios.php?acao=deletar&id=" . $value->id . "'>Deletar</a>"; ?>
                 </td>
-				<td><a href="exportFuncionarios_csv.php">Exportar</td>
+				<td><a class="btn btn-warning" href="exportFuncionarios_csv.php">Exportar</td>
             </tr>
             </tbody>
         <?php } ?>
     </table>
 </div>
+<a class="btn btn-danger" href="logout.php">Sair</a>
 </body>
 </html>
 <?php } else {
